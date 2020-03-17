@@ -1,9 +1,13 @@
 package com.example.mobiledevelopersummary.models
 
-data class Content(val menuId: String, val name: String, val image: String) {
-    constructor(menuId: String, name: String, image: String, description: String) : this(
-        menuId,
-        name,
-        image
-    )
-}
+import com.google.firebase.database.IgnoreExtraProperties
+
+@IgnoreExtraProperties
+data class Content(
+    var menuId: String?="",
+    var name: String?="",
+    var image: String?="",
+    var contentId: String?="",
+    var description: String?=""
+)
+

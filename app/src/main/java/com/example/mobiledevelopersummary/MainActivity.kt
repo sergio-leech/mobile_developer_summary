@@ -1,4 +1,4 @@
-package com.example.mobiledevelopersammary
+package com.example.mobiledevelopersummary
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

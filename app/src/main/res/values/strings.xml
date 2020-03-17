@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">MobileDeveloperSammary</string>
+    <string name="app_name">MOBILE DEVELOPER SUMMARY</string>
+    <string name="main_folder">MAIN FOLDER</string>
+    <string name="my_folder">MY FOLDER</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="kotlin">Kotlin</string>
+    <string name="android">Android</string>
+    <string name="additional_tools">Additional tools</string>
+    <string name="content_image">content image</string>
 </resources>
