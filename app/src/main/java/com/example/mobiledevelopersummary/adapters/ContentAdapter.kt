@@ -1,10 +1,13 @@
 package com.example.mobiledevelopersummary.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobiledevelopersummary.MainFolderFragmentDirections
 import com.example.mobiledevelopersummary.databinding.ListItemBinding
 import com.example.mobiledevelopersummary.models.Content
 
@@ -19,6 +22,20 @@ class ContentAdapter:ListAdapter<Content,ContentAdapter.ContentViewHolder>(Conte
     }
 
     class ContentViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+              binding.setClickListener {
+                  binding.content?.let { content ->
+                      navigateToPlant(content,it)
+                  }
+              }
+        }
+
+
+        private fun navigateToPlant(content: Content, view: View) {
+            val direction=MainFolderFragmentDirections.actionMainFolderFragmentToContentDetail(content.contentId)
+            view.findNavController().navigate(direction)
+        }
         fun bind(item: Content) {
             binding.apply {
                 content = item

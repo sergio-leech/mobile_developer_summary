@@ -9,5 +9,19 @@
         android:id="@+id/mainFolderFragment"
         android:name="com.example.mobiledevelopersummary.MainFolderFragment"
         android:label="fragment_main_folder"
-        tools:layout="@layout/fragment_main_folder" />
+        tools:layout="@layout/fragment_main_folder" >
+        <action
+            android:id="@+id/action_mainFolderFragment_to_contentDetail"
+            app:destination="@id/contentDetail" />
+    </fragment>
+    <activity
+        android:id="@+id/contentDetail"
+        android:name="com.example.mobiledevelopersummary.content_detail.ContentDetail"
+        android:label="activity_content_detail"
+        tools:layout="@layout/activity_content_detail" >
+        <argument
+            android:name="contentId"
+            app:argType="string"
+            app:nullable="true" />
+    </activity>
 </navigation>

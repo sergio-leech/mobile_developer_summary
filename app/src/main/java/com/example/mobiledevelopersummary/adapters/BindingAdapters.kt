@@ -1,4 +1,4 @@
-package com.example.mobiledevelopersummary
+package com.example.mobiledevelopersummary.adapters
 
 import android.widget.ImageView
 import android.widget.TextView

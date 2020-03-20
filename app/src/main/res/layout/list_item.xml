@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
             name="content"
             type="com.example.mobiledevelopersummary.models.Content" />
 
@@ -18,6 +22,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="7dp"
+        android:onClick="@{clickListener}"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp">
 
