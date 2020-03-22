@@ -1,4 +1,4 @@
-package com.example.mobiledevelopersummary
+package com.example.mobiledevelopersummary.bottom_navigation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mobiledevelopersummary.R
 import com.example.mobiledevelopersummary.adapters.ADDITIONAL_TOOLS_PAGE_INDEX
 import com.example.mobiledevelopersummary.adapters.ANDROID_PAGE_INDEX
 import com.example.mobiledevelopersummary.adapters.ContentViewPagerAdapter

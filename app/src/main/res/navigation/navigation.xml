@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFolderFragment"
-        android:name="com.example.mobiledevelopersummary.MainFolderFragment"
+        android:name="com.example.mobiledevelopersummary.bottom_navigation.MainFolderFragment"
         android:label="fragment_main_folder"
         tools:layout="@layout/fragment_main_folder" >
         <action
@@ -24,4 +24,8 @@
             app:argType="string"
             app:nullable="true" />
     </activity>
+    <fragment
+        android:id="@+id/myFolderFragment"
+        android:name="com.example.mobiledevelopersummary.bottom_navigation.MyFolderFragment"
+        android:label="MyFolderFragment" />
 </navigation>

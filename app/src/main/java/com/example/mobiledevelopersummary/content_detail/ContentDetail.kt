@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.mobiledevelopersummary.R
+import com.example.mobiledevelopersummary.database.ContentDatabase
 import com.example.mobiledevelopersummary.databinding.ActivityContentDetailBinding
 import com.example.mobiledevelopersummary.viewmodel.DetailViewModel
 import com.example.mobiledevelopersummary.viewmodel.DetailViewModelFactory
@@ -21,7 +22,8 @@ private lateinit var binding:ActivityContentDetailBinding
         super.onCreate(savedInstanceState)
        binding=DataBindingUtil.setContentView(this,R.layout.activity_content_detail)
       val arg=ContentDetailArgs.fromBundle(intent.extras!!).contentId
-        viewModelFactory= DetailViewModelFactory(arg)
+       val dataSource=ContentDatabase.getInstance(this).contentDatabaseDao
+        viewModelFactory= DetailViewModelFactory(arg,dataSource)
         viewModel=ViewModelProvider(this,viewModelFactory).get(DetailViewModel::class.java)
         binding.viewModel=viewModel
         binding.lifecycleOwner = this
@@ -30,12 +32,12 @@ private lateinit var binding:ActivityContentDetailBinding
        var isToolbarShown = false
 
        // scroll change listener begins at Y = 0 when image is fully collapsed
-       content_detail_scrollview.setOnScrollChangeListener(
+      binding.contentDetailScrollview.setOnScrollChangeListener(
            NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
 
                // User scrolled past image to height of toolbar and the title text is
                // underneath the toolbar, so the toolbar should be shown.
-               val shouldShowToolbar = scrollY > toolbar?.height!!
+               val shouldShowToolbar = scrollY > binding.toolbar.height
 
                // The new state of the toolbar differs from the previous state; update
                // appbar and toolbar attributes.
@@ -43,15 +45,15 @@ private lateinit var binding:ActivityContentDetailBinding
                    isToolbarShown = shouldShowToolbar
 
                    // Use shadow animator to add elevation if toolbar is shown
-                   appbar.isActivated = shouldShowToolbar
+                  binding.appbar.isActivated = shouldShowToolbar
 
                    // Show the plant name if toolbar is shown
-                   toolbar_layout?.isTitleEnabled = shouldShowToolbar
+                  binding.toolbarLayout.isTitleEnabled = shouldShowToolbar
                }
            }
        )
 
-       toolbar?.setNavigationOnClickListener {
+       binding.toolbar.setNavigationOnClickListener {
            onBackPressed()
        }
     }

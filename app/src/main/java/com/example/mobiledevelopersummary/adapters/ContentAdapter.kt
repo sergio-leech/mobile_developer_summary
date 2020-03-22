@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobiledevelopersummary.MainFolderFragmentDirections
+import com.example.mobiledevelopersummary.bottom_navigation.MainFolderFragmentDirections
 import com.example.mobiledevelopersummary.databinding.ListItemBinding
 import com.example.mobiledevelopersummary.models.Content
 
@@ -33,7 +33,7 @@ class ContentAdapter:ListAdapter<Content,ContentAdapter.ContentViewHolder>(Conte
 
 
         private fun navigateToPlant(content: Content, view: View) {
-            val direction=MainFolderFragmentDirections.actionMainFolderFragmentToContentDetail(content.contentId)
+            val direction= MainFolderFragmentDirections.actionMainFolderFragmentToContentDetail(content.contentId)
             view.findNavController().navigate(direction)
         }
         fun bind(item: Content) {

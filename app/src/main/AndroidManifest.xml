@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
+        <activity android:name=".content_detail.MyContentDetail">
+
+        </activity>
         <activity android:name=".content_detail.ContentDetail">
 
         </activity>
