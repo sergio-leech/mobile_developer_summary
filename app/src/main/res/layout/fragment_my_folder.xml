@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
+    <!--<data>
        <variable
            name="viewModel"
            type="com.example.mobiledevelopersummary.viewmodel.MyContentListViewModel" />
-    </data>
+    </data>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_content_list"
@@ -15,8 +15,9 @@
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="1"
-        app:myListData="@{viewModel.myContent}"
-       tools:listitem="@layout/list_item" />
+        tools:listitem="@layout/list_item"/>
+        <!--app:myListData="@{viewModel.myContent}"-->
+
 </layout>
 
 

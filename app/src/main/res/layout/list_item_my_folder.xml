@@ -52,6 +52,7 @@
                 android:textStyle="bold"
                 tool:text="KOTLIN" />
 
+
         </FrameLayout>
 
     </androidx.cardview.widget.CardView>

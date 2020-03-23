@@ -27,5 +27,17 @@
     <fragment
         android:id="@+id/myFolderFragment"
         android:name="com.example.mobiledevelopersummary.bottom_navigation.MyFolderFragment"
-        android:label="MyFolderFragment" />
+        android:label="MyFolderFragment" >
+        <action
+            android:id="@+id/action_myFolderFragment_to_myContentDetail"
+            app:destination="@id/myContentDetail" />
+    </fragment>
+    <activity
+        android:id="@+id/myContentDetail"
+        android:name="com.example.mobiledevelopersummary.content_detail.MyContentDetail"
+        android:label="MyContentDetail" >
+        <argument
+            android:name="myContentId"
+            app:argType="string" />
+    </activity>
 </navigation>

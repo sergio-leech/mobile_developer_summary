@@ -14,47 +14,21 @@ import com.example.mobiledevelopersummary.viewmodel.DetailViewModelFactory
 import kotlinx.android.synthetic.main.activity_content_detail.*
 
 class ContentDetail : AppCompatActivity() {
-private lateinit var binding:ActivityContentDetailBinding
-    private lateinit var viewModel:DetailViewModel
-    private lateinit var viewModelFactory:DetailViewModelFactory
-   // private val args:ContentDetailArgs by navArgs<>()
+    private lateinit var binding: ActivityContentDetailBinding
+    private lateinit var viewModel: DetailViewModel
+    private lateinit var viewModelFactory: DetailViewModelFactory
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       binding=DataBindingUtil.setContentView(this,R.layout.activity_content_detail)
-      val arg=ContentDetailArgs.fromBundle(intent.extras!!).contentId
-       val dataSource=ContentDatabase.getInstance(this).contentDatabaseDao
-        viewModelFactory= DetailViewModelFactory(arg,dataSource)
-        viewModel=ViewModelProvider(this,viewModelFactory).get(DetailViewModel::class.java)
-        binding.viewModel=viewModel
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_content_detail)
+        val application = requireNotNull(this).application
+        val arg = ContentDetailArgs.fromBundle(intent.extras!!).contentId
+        val dataSource = ContentDatabase.getInstance(application).contentDatabaseDao
+        viewModelFactory = DetailViewModelFactory(arg, dataSource, application)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
+        binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
-
-       var isToolbarShown = false
-
-       // scroll change listener begins at Y = 0 when image is fully collapsed
-      binding.contentDetailScrollview.setOnScrollChangeListener(
-           NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
-
-               // User scrolled past image to height of toolbar and the title text is
-               // underneath the toolbar, so the toolbar should be shown.
-               val shouldShowToolbar = scrollY > binding.toolbar.height
-
-               // The new state of the toolbar differs from the previous state; update
-               // appbar and toolbar attributes.
-               if (isToolbarShown != shouldShowToolbar) {
-                   isToolbarShown = shouldShowToolbar
-
-                   // Use shadow animator to add elevation if toolbar is shown
-                  binding.appbar.isActivated = shouldShowToolbar
-
-                   // Show the plant name if toolbar is shown
-                  binding.toolbarLayout.isTitleEnabled = shouldShowToolbar
-               }
-           }
-       )
-
-       binding.toolbar.setNavigationOnClickListener {
-           onBackPressed()
-       }
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
     }
 }

@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.mobiledevelopersummary.models.Content
 
-@Database(entities = [MyContent::class], version = 2, exportSchema = false)
+@Database(entities = [MyContent::class], version = 3, exportSchema = false)
 abstract class ContentDatabase : RoomDatabase() {
     abstract val contentDatabaseDao: ContentDatabaseDao
 

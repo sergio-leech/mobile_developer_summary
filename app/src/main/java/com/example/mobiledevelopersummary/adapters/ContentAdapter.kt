@@ -26,13 +26,13 @@ class ContentAdapter:ListAdapter<Content,ContentAdapter.ContentViewHolder>(Conte
         init {
               binding.setClickListener {
                   binding.content?.let { content ->
-                      navigateToPlant(content,it)
+                      navigateToContentDetail(content,it)
                   }
               }
         }
 
 
-        private fun navigateToPlant(content: Content, view: View) {
+        private fun navigateToContentDetail(content: Content, view: View) {
             val direction= MainFolderFragmentDirections.actionMainFolderFragmentToContentDetail(content.contentId)
             view.findNavController().navigate(direction)
         }
