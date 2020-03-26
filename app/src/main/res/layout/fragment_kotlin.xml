@@ -1,19 +1,79 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-       <data>
-           <variable
-               name="viewModel"
-               type="com.example.mobiledevelopersummary.viewmodel.ContentListViewModel" />
-       </data>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/kotlin_list"
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.example.mobiledevelopersummary.viewmodel.ContentListViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="1"
-        listData="@{viewModel.contents}"
-        tools:listitem="@layout/list_item"/>
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/kotlin_list"
+            listData="@{viewModel.contents}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:spanCount="1"
+            tools:listitem="@layout/list_item" />
+
+        <ImageView
+            android:id="@+id/status_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/content_status"
+            android:src="@drawable/ic_connection_error"
+            android:visibility="@{viewModel.connectToInternet?View.GONE:View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/check_internet_connection"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:visibility="@{viewModel.connectToInternet?View.GONE:View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/status_image"
+            app:layout_constraintVertical_bias="0.099" />
+
+        <Button
+            android:id="@+id/refresh_btn"
+            android:background="@drawable/shape_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tap_to_refresh"
+            android:padding="15dp"
+            android:visibility="@{viewModel.connectToInternet?View.GONE:View.VISIBLE}"
+            android:textColor="@color/colorBlueGrey400"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.511"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_status"
+            app:layout_constraintVertical_bias="0.21" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
 
 

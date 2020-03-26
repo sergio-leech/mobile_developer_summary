@@ -30,9 +30,9 @@ open class SwipeToDeleteCallback(val context: Context) : ItemTouchHelper.SimpleC
         isCurrentlyActive: Boolean
     ) {
         val itemView = viewHolder.itemView
-        val deleteIcon=ContextCompat.getDrawable(context,R.drawable.delete_item)
+        val deleteIcon=ContextCompat.getDrawable(context,R.drawable.delete_item_content)
 
-        val colorDrawableBackground=ColorDrawable(R.color.colorBlueGrey400)
+        val colorDrawableBackground=ColorDrawable(Color.WHITE)
         val iconMarginVertical = (viewHolder.itemView.height - deleteIcon!!.intrinsicHeight) / 2
 
         if (dX > 0) {

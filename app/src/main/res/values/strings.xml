@@ -9,4 +9,8 @@
     <string name="android">Android</string>
     <string name="additional_tools">Additional tools</string>
     <string name="content_image">content image</string>
+    <string name="my_folder_is_empty">MY FOLDER IS EMPTY</string>
+    <string name="content_status">content status</string>
+    <string name="check_internet_connection">CHECK INTERNET CONNECTION</string>
+    <string name="tap_to_refresh">TAP TO REFRESH</string>
 </resources>

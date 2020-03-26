@@ -13,6 +13,7 @@ class MyContentListViewModel(databaseDao: ContentDatabaseDao):ViewModel() {
        private var _myContent= MutableLiveData<List<MyContent>>()
        val myContent:LiveData<List<MyContent>>
          get() = _myContent
+      // val list=_myContent.value==null
 
        init {
            getAllContents()

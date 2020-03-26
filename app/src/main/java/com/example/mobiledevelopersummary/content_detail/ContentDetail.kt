@@ -1,11 +1,13 @@
 package com.example.mobiledevelopersummary.content_detail
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.example.mobiledevelopersummary.MainActivity
 import com.example.mobiledevelopersummary.R
 import com.example.mobiledevelopersummary.database.ContentDatabase
 import com.example.mobiledevelopersummary.databinding.ActivityContentDetailBinding
@@ -21,7 +23,7 @@ class ContentDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_content_detail)
         val application = requireNotNull(this).application
-        val arg = ContentDetailArgs.fromBundle(intent.extras!!).contentId
+        val arg = intent.extras?.let { ContentDetailArgs.fromBundle(it).contentId }
         val dataSource = ContentDatabase.getInstance(application).contentDatabaseDao
         viewModelFactory = DetailViewModelFactory(arg, dataSource, application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
@@ -29,6 +31,10 @@ class ContentDetail : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.toolbar.setNavigationOnClickListener {
             onBackPressed()
+        }
+        binding.refreshBtn.setOnClickListener {
+            finish()
+            startActivity(Intent(this,MainActivity::class.java))
         }
     }
 }
