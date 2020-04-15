@@ -9,7 +9,7 @@
         android:id="@+id/mainFolderFragment"
         android:name="com.example.mobiledevelopersummary.bottom_navigation.MainFolderFragment"
         android:label="fragment_main_folder"
-        tools:layout="@layout/fragment_main_folder" >
+        tools:layout="@layout/fragment_main_folder">
         <action
             android:id="@+id/action_mainFolderFragment_to_contentDetail"
             app:destination="@id/contentDetail" />
@@ -18,7 +18,7 @@
         android:id="@+id/contentDetail"
         android:name="com.example.mobiledevelopersummary.content_detail.ContentDetail"
         android:label="activity_content_detail"
-        tools:layout="@layout/activity_content_detail" >
+        tools:layout="@layout/activity_content_detail">
         <argument
             android:name="contentId"
             app:argType="string"
@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/myFolderFragment"
         android:name="com.example.mobiledevelopersummary.bottom_navigation.MyFolderFragment"
-        android:label="MyFolderFragment" >
+        android:label="MyFolderFragment">
         <action
             android:id="@+id/action_myFolderFragment_to_myContentDetail"
             app:destination="@id/myContentDetail" />
@@ -35,7 +35,7 @@
     <activity
         android:id="@+id/myContentDetail"
         android:name="com.example.mobiledevelopersummary.content_detail.MyContentDetail"
-        android:label="MyContentDetail" >
+        android:label="MyContentDetail">
         <argument
             android:name="myContentId"
             app:argType="string" />

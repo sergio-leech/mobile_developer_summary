@@ -11,15 +11,14 @@ import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-private lateinit var navController:NavController
+
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        navController=Navigation.findNavController(this,R.id.nav_host_fragment)
+
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         menu_bottom.setupWithNavController(navController)
     }
-
-
-
-
 }

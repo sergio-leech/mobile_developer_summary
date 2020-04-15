@@ -10,11 +10,12 @@ class MyDetailViewModelFactory(
     private val databaseDao: ContentDatabaseDao,
     private val application: Application
 ) : ViewModelProvider.Factory {
+
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-       if (modelClass.isAssignableFrom(MyDetailViewModel::class.java)){
-           return MyDetailViewModel(myContentId,databaseDao,application) as T
-       }
+        if (modelClass.isAssignableFrom(MyDetailViewModel::class.java)) {
+            return MyDetailViewModel(myContentId, databaseDao, application) as T
+        }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

@@ -11,21 +11,23 @@ import com.google.firebase.database.MutableData
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MyDetailViewModel( _myContentId: String, val database: ContentDatabaseDao, application: Application):AndroidViewModel(application) {
-      private var _myContent= MutableLiveData<MyContent>()
-    val myContent:LiveData<MyContent>
+class MyDetailViewModel(
+    _myContentId: String,
+    val database: ContentDatabaseDao,
+    application: Application
+) : AndroidViewModel(application) {
+    private var _myContent = MutableLiveData<MyContent>()
+    val myContent: LiveData<MyContent>
+        get() = _myContent
+    private val myContentId = _myContentId
 
-    get() = _myContent
-    private val myContentId=_myContentId
-
-
-init {
-    getContent()
-}
-    private  fun getContent(){
-       viewModelScope.launch {
-           _myContent.value=database.get(myContentId)
-       }
+    init {
+        getContent()
     }
 
+    private fun getContent() {
+        viewModelScope.launch {
+            _myContent.value = database.get(myContentId)
+        }
+    }
 }

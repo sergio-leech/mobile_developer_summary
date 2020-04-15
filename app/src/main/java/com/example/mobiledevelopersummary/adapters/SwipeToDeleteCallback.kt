@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobiledevelopersummary.R
 
-open class SwipeToDeleteCallback(val context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+open class SwipeToDeleteCallback(val context: Context) :
+    ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
     override fun onMove(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
@@ -30,13 +31,18 @@ open class SwipeToDeleteCallback(val context: Context) : ItemTouchHelper.SimpleC
         isCurrentlyActive: Boolean
     ) {
         val itemView = viewHolder.itemView
-        val deleteIcon=ContextCompat.getDrawable(context,R.drawable.delete_item_content)
+        val deleteIcon = ContextCompat.getDrawable(context, R.drawable.delete_item_content)
 
-        val colorDrawableBackground=ColorDrawable(Color.WHITE)
+        val colorDrawableBackground = ColorDrawable(Color.WHITE)
         val iconMarginVertical = (viewHolder.itemView.height - deleteIcon!!.intrinsicHeight) / 2
 
         if (dX > 0) {
-            colorDrawableBackground.setBounds(itemView.left, itemView.top, dX.toInt(), itemView.bottom)
+            colorDrawableBackground.setBounds(
+                itemView.left,
+                itemView.top,
+                dX.toInt(),
+                itemView.bottom
+            )
             deleteIcon.setBounds(
                 itemView.left + iconMarginVertical,
                 itemView.top + iconMarginVertical,
@@ -60,7 +66,6 @@ open class SwipeToDeleteCallback(val context: Context) : ItemTouchHelper.SimpleC
         }
 
         colorDrawableBackground.draw(c)
-
         c.save()
 
         if (dX > 0)
@@ -69,14 +74,10 @@ open class SwipeToDeleteCallback(val context: Context) : ItemTouchHelper.SimpleC
             c.clipRect(itemView.right + dX.toInt(), itemView.top, itemView.right, itemView.bottom)
 
         deleteIcon.draw(c)
-
         c.restore()
+
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
 
-
-    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-
-    }
-
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {}
 }

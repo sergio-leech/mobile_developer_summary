@@ -10,6 +10,7 @@
             name="viewModel"
             type="com.example.mobiledevelopersummary.viewmodel.ContentListViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -57,13 +58,13 @@
 
         <Button
             android:id="@+id/refresh_btn"
-            android:background="@drawable/shape_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tap_to_refresh"
+            android:background="@drawable/shape_btn"
             android:padding="15dp"
-            android:visibility="@{viewModel.connectToInternet?View.GONE:View.VISIBLE}"
+            android:text="@string/tap_to_refresh"
             android:textColor="@color/colorBlueGrey400"
+            android:visibility="@{viewModel.connectToInternet?View.GONE:View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.511"
