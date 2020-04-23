@@ -1,15 +1,14 @@
 package com.example.mobiledevelopersummary.viewmodel
 
 import android.app.Application
-import android.util.Log
-import android.view.Gravity
 import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.mobiledevelopersummary.R
-import com.example.mobiledevelopersummary.database.ContentDatabaseDao
+import com.example.mobiledevelopersummary.database.ContentDatabase
 import com.example.mobiledevelopersummary.database.MyContent
 import com.example.mobiledevelopersummary.isConnectedToInternet
 import com.example.mobiledevelopersummary.models.Content
+import com.example.mobiledevelopersummary.repository.ContentsRepository
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -18,11 +17,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class DetailViewModel(
-    _contentId: String?,
-    val database: ContentDatabaseDao,
-    application: Application
-) : AndroidViewModel(application) {
+class DetailViewModel(_contentId: String?, application: Application) :
+    AndroidViewModel(application) {
+
+    private val repository =
+        ContentsRepository(ContentDatabase.getInstance(application).contentDatabaseDao)
 
     private val contentId = _contentId
     val connectToInternet = MutableLiveData<Boolean>()
@@ -71,22 +70,17 @@ class DetailViewModel(
         }
     }
 
-    private suspend fun insert() {
-        val content = contentId?.let { contentId ->
-            database.get(contentId)
-        }
-        if (content == null) {
-            database.insert(
-                MyContent(
-                    System.currentTimeMillis(),
-                    selectContent.value?.menuId,
-                    selectContent.value?.name,
-                    selectContent.value?.image,
-                    selectContent.value?.contentId.toString(),
-                    selectContent.value?.description
-                )
+    private fun insert() = viewModelScope.launch(Dispatchers.IO) {
+        repository.insert(
+            MyContent(
+                System.currentTimeMillis(),
+                selectContent.value?.menuId,
+                selectContent.value?.name,
+                selectContent.value?.image,
+                selectContent.value?.contentId.toString(),
+                selectContent.value?.description
             )
-        }
+        )
     }
 }
 

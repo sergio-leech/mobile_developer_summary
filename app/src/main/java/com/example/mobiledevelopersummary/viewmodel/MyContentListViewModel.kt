@@ -1,33 +1,25 @@
 package com.example.mobiledevelopersummary.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.mobiledevelopersummary.database.ContentDatabaseDao
+import android.app.Application
+import androidx.lifecycle.*
+import com.example.mobiledevelopersummary.database.ContentDatabase
 import com.example.mobiledevelopersummary.database.MyContent
+import com.example.mobiledevelopersummary.repository.ContentsRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MyContentListViewModel(databaseDao: ContentDatabaseDao) : ViewModel() {
-    private val database = databaseDao
+class MyContentListViewModel(application: Application) : AndroidViewModel(application) {
 
-    private var _myContent = MutableLiveData<List<MyContent>>()
+    private val repository: ContentsRepository =
+        ContentsRepository(ContentDatabase.getInstance(application).contentDatabaseDao)
+
     val myContent: LiveData<List<MyContent>>
-        get() = _myContent
 
     init {
-        getAllContents()
+        myContent = repository.allMyContents
     }
 
-    private fun getAllContents() {
-        viewModelScope.launch {
-            _myContent.value = database.getAllContents()
-        }
-    }
-
-    fun delete(myContent: MyContent) {
-        viewModelScope.launch {
-            database.delete(myContent)
-        }
+    fun delete(myContent: MyContent) = viewModelScope.launch(Dispatchers.IO) {
+        repository.delete(myContent)
     }
 }

@@ -1,16 +1,16 @@
 package com.example.mobiledevelopersummary.viewmodel
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.mobiledevelopersummary.database.ContentDatabaseDao
 
-class MyContentListViewModelFactory(private val dataSource: ContentDatabaseDao) :
+class MyContentListViewModelFactory( private val application: Application) :
     ViewModelProvider.Factory {
 
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MyContentListViewModel::class.java)) {
-            return MyContentListViewModel(dataSource) as T
+            return MyContentListViewModel(application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

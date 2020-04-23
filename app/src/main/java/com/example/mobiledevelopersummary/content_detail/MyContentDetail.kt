@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.mobiledevelopersummary.R
-import com.example.mobiledevelopersummary.database.ContentDatabase
 import com.example.mobiledevelopersummary.databinding.ActivityMyContentDetailBinding
 import com.example.mobiledevelopersummary.viewmodel.MyDetailViewModel
 import com.example.mobiledevelopersummary.viewmodel.MyDetailViewModelFactory
@@ -23,9 +22,8 @@ class MyContentDetail : AppCompatActivity() {
 
         val args = MyContentDetailArgs.fromBundle(intent.extras!!).myContentId
         val application = requireNotNull(this).application
-        val database = ContentDatabase.getInstance(application).contentDatabaseDao
 
-        viewModelFactory = MyDetailViewModelFactory(args, database, application)
+        viewModelFactory = MyDetailViewModelFactory(args,application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MyDetailViewModel::class.java)
 
         binding.lifecycleOwner = this

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobiledevelopersummary.R
 import com.example.mobiledevelopersummary.adapters.MyContentListAdapter
 import com.example.mobiledevelopersummary.adapters.SwipeToDeleteCallback
-import com.example.mobiledevelopersummary.database.ContentDatabase
 import com.example.mobiledevelopersummary.databinding.FragmentMyFolderBinding
 import com.example.mobiledevelopersummary.viewmodel.MyContentListViewModel
 import com.example.mobiledevelopersummary.viewmodel.MyContentListViewModelFactory
@@ -35,9 +34,8 @@ class MyFolderFragment : Fragment() {
         binding.lifecycleOwner = this
 
         val application = requireNotNull(this.activity).application
-        val dataSource = ContentDatabase.getInstance(application).contentDatabaseDao
 
-        myContentListViewModelFactory = MyContentListViewModelFactory(dataSource)
+        myContentListViewModelFactory = MyContentListViewModelFactory(application)
         myContentListViewModel = ViewModelProvider(
             this,
             myContentListViewModelFactory
