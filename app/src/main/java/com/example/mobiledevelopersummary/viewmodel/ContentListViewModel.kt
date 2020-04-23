@@ -41,20 +41,20 @@ class ContentListViewModel(_contentOrderByChild: String, application: Applicatio
         }
     }
 
-    private suspend fun connectToFirebase() {
-        withContext(Dispatchers.IO) {
-            FirebaseDatabase.getInstance().getReference("contents").orderByChild("menuId")
-                .equalTo(contentOrderByChild)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onCancelled(error: DatabaseError) {
-                        error.message
-                    }
+    private suspend fun connectToFirebase() = withContext(Dispatchers.IO) {
 
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        _contents.postValue(toContent(dataSnapshot))
-                    }
-                })
-        }
+        FirebaseDatabase.getInstance().getReference("contents").orderByChild("menuId")
+            .equalTo(contentOrderByChild)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {
+                    error.message
+                }
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    _contents.postValue(toContent(dataSnapshot))
+
+                }
+            })
     }
 }
 

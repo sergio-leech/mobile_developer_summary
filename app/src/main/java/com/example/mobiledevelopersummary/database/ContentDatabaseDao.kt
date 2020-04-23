@@ -1,11 +1,12 @@
 package com.example.mobiledevelopersummary.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 
 @Dao
 interface ContentDatabaseDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(myContent: MyContent)
 
     @Update
@@ -15,11 +16,11 @@ interface ContentDatabaseDao {
     suspend fun delete(myContent: MyContent)
 
     @Query("SELECT * from my_content_table WHERE contentId = :key")
-    suspend fun get(key: String): MyContent
+    fun get(key: String): LiveData<MyContent>
 
     @Query("DELETE FROM my_content_table")
     suspend fun clear()
 
     @Query("SELECT * FROM my_content_table ORDER BY data DESC")
-    suspend fun getAllContents(): List<MyContent>
+    fun getAllContents(): LiveData<List<MyContent>>
 }

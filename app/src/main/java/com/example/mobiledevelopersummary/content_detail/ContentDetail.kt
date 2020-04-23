@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.mobiledevelopersummary.MainActivity
 import com.example.mobiledevelopersummary.R
-import com.example.mobiledevelopersummary.database.ContentDatabase
 import com.example.mobiledevelopersummary.databinding.ActivityContentDetailBinding
 import com.example.mobiledevelopersummary.viewmodel.DetailViewModel
 import com.example.mobiledevelopersummary.viewmodel.DetailViewModelFactory
@@ -26,9 +25,8 @@ class ContentDetail : AppCompatActivity() {
         val arg = intent.extras?.let { content ->
             ContentDetailArgs.fromBundle(content).contentId
         }
-        val dataSource = ContentDatabase.getInstance(application).contentDatabaseDao
 
-        viewModelFactory = DetailViewModelFactory(arg, dataSource, application)
+        viewModelFactory = DetailViewModelFactory(arg,application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
 
         binding.viewModel = viewModel
