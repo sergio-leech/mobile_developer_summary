@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.*
 import com.example.mobiledevelopersummary.isConnectedToInternet
 import com.example.mobiledevelopersummary.models.Content
+import com.example.mobiledevelopersummary.repository.FirebaseRepository
 import com.google.firebase.database.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,10 +18,13 @@ import kotlin.Exception
 class ContentListViewModel(_contentOrderByChild: String, application: Application) :
     AndroidViewModel(application) {
 
+    private val repository = FirebaseRepository()
     private var contentOrderByChild = _contentOrderByChild
-    private val _contents = MutableLiveData<List<Content>>()
+
+    private var _contents = MutableLiveData<List<Content>>()
     val contents: LiveData<List<Content>>
         get() = _contents
+
     val connectToInternet = MutableLiveData<Boolean>()
 
     init {
@@ -32,40 +36,16 @@ class ContentListViewModel(_contentOrderByChild: String, application: Applicatio
         viewModelScope.launch {
             try {
                 if (connectToInternet.value == true)
-                    connectToFirebase()
-
+                    _contents = repository.getFirebaseContents(contentOrderByChild)
             } catch (e: Exception) {
                 connectToInternet.value = false
                 _contents.value = ArrayList()
             }
         }
     }
-
-    private suspend fun connectToFirebase() = withContext(Dispatchers.IO) {
-
-        FirebaseDatabase.getInstance().getReference("contents").orderByChild("menuId")
-            .equalTo(contentOrderByChild)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                    error.message
-                }
-
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    _contents.postValue(toContent(dataSnapshot))
-
-                }
-            })
-    }
 }
 
-private fun toContent(input: DataSnapshot): List<Content> {
-    val list: MutableList<Content> = ArrayList()
-    for (snap in input.children) {
-        val mContent: Content? = snap.getValue(Content::class.java)
-        list.add(mContent!!)
-    }
-    return list.toList()
-}
+
 
 
 
