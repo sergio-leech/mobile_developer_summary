@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobiledevelopersummary.bottom_navigation.MainFolderFragmentDirections
 import com.example.mobiledevelopersummary.databinding.ListItemBinding
 import com.example.mobiledevelopersummary.models.Content
+import timber.log.Timber
 
 class ContentAdapter :
     ListAdapter<Content, ContentAdapter.ContentViewHolder>(ContentDiffCallback()) {
@@ -40,8 +41,9 @@ class ContentAdapter :
         }
 
         private fun navigateToContentDetail(content: Content, view: View) {
+            Timber.d("ContentID: ${content.contentId}")
             val direction =
-                MainFolderFragmentDirections.actionMainFolderFragmentToContentDetail(content.contentId)
+                MainFolderFragmentDirections.actionMainFolderFragmentToContentDetail3(content.contentId)
             view.findNavController().navigate(direction)
         }
 

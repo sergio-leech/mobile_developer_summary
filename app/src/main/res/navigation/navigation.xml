@@ -11,7 +11,7 @@
         android:label="fragment_main_folder"
         tools:layout="@layout/fragment_main_folder">
         <action
-            android:id="@+id/action_mainFolderFragment_to_contentDetail"
+            android:id="@+id/action_mainFolderFragment_to_contentDetail3"
             app:destination="@id/contentDetail" />
     </fragment>
     <activity
@@ -22,7 +22,8 @@
         <argument
             android:name="contentId"
             app:argType="string"
-            app:nullable="true" />
+            app:nullable="true"
+            android:defaultValue="0" />
     </activity>
     <fragment
         android:id="@+id/myFolderFragment"
